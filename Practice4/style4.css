@@ -1,0 +1,854 @@
+/* ===== ОСНОВНЫЕ СТИЛИ ===== */
+
+/* 1. СЕЛЕКТОР ПО ТЕГУ */
+body {
+    background: linear-gradient(135deg, #0a2472, #ee5253);
+    background-color: #e6f2ff;
+    color: #0a2472;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Специальный фон для страницы формы */
+body.form-page {
+    background: linear-gradient(135deg, #121e6f 0%, #d8223a 100%);
+    padding: 40px 0;
+    margin: 0;
+}
+
+/* Селектор по тегу для заголовков */
+h1, h2, h3, h4 {
+    color: #ffffff;  /* Белый для заголовков на цветном фоне */
+    margin-top: 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Тень для читаемости */
+}
+
+h1 {
+    border-bottom: 3px solid #0066cc;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Селектор по тегу для ссылок */
+a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #003d82;
+    text-decoration: underline;
+}
+
+/* Селектор по тегу для параграфов */
+p {
+    margin: 8px 0;
+}
+
+/* ===== КЛАССЫ ===== */
+
+/* 2. СЕЛЕКТОР ПО КЛАССУ */
+.user-block {
+    position: fixed;
+    top: 20px;
+    right: 20px;  
+    z-index: 100;
+    padding: 12px 25px;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    min-width: 180px;
+    color: white;
+    background: linear-gradient(135deg, #0056b3, #003d82);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.user-info {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.user-role {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 2px;
+}
+
+/* Основные блоки контента */
+.content-block {
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+    border: 1px solid #e0e7ff;
+    position: relative;
+    height: 100%;
+}
+
+/* Заголовки внутри белых блоков - темные для контраста */
+.content-block h2 {
+    color: #0a2472;  /* Темно-синий для заголовков на белом фоне */
+    border-bottom: 2px solid #0066cc;
+    padding-bottom: 8px;
+    text-shadow: none;
+}
+
+.content-block h3 {
+    color: #0a2472;  /* Темно-синий для подзаголовков */
+    text-shadow: none;
+}
+
+/* Текст внутри белых блоков */
+.content-block p, 
+.content-block li,
+.content-block .journal-info,
+.content-block .instruction-box p,
+.content-block .instruction-box .note {
+    color: #333333;  /* Темно-серый для основного текста */
+    text-shadow: none;
+}
+
+/* Специально для блока "Классный журнал" */
+#journal h2 {
+    color: #0a2472 !important;
+    font-weight: 700;
+}
+
+/* Для карточек учеников */
+.student-card h3 {
+    color: #0a2472;
+}
+
+.student-card p {
+    color: #1a3a7a;  /* Чуть светлее, но читаемо */
+}
+
+/* Для адаптивных материалов */
+.material-card h3 {
+    color: #0a2472;
+    font-weight: 700;
+}
+
+.material-card p {
+    color: #2c3e50;
+}
+
+.material-card li {
+    color: #2c3e50;
+}
+
+/* Для блока успеваемости */
+#tasks h2, #materials h2, .content-block h2 {
+    color: #0a2472 !important;
+}
+
+/* Строки в таблице */
+.table {
+    color: #2c3e50;  /* Темно-сине-серый для текста таблицы */
+}
+
+.table thead th {
+    color: #0a2472;
+    font-weight: 700;
+}
+
+/* Навигация */
+.main-nav {
+    background-color: rgba(0,102,204,0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border-left: 4px solid #0066cc;
+}
+
+.nav-label {
+    color: #ffffff;  /* Белый на цветном фоне */
+    font-weight: bold;
+    margin-right: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.nav-link {
+    margin-right: 15px;
+    color: #ffffff;  /* Белый на цветном фоне */
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.nav-link:hover {
+    background-color: rgba(0,102,204,0.1);
+    text-decoration: none;
+}
+
+/* Карточки учеников */
+.student-card {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #c5d5ff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.ras-card {
+    background: linear-gradient(135deg, #e6f2ff, #d4e6ff);
+}
+
+.cp-card {
+    background: linear-gradient(135deg, #f0f8ff, #e0f0ff);
+}
+
+.student-info {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.student-photo img {
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.status-indicator.active {
+    background-color: #28a745;
+}
+
+/* Задания */
+.task {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    height: 100%;
+}
+
+.math-task {
+    border-left: 5px solid #28a745;
+}
+
+.math-task h3 {
+    color: #28a745;
+}
+
+.russian-task {
+    border-left: 5px solid #17a2b8;
+}
+
+.russian-task h3 {
+    color: #17a2b8;
+}
+
+/* Адаптивные материалы */
+.material-card {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.material-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* ===== СТИЛИ ДЛЯ ФОРМЫ ===== */
+.form-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    color: #0a2472;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+.form-header .glyphicon {
+    font-size: 50px;
+    color: #0066cc;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-group {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.input-group:hover {
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+.input-group-addon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+}
+
+.input-group-addon .glyphicon {
+    color: white;
+}
+
+.form-control {
+    border: 2px solid #e0e7ff;
+    padding: 12px 20px;
+    height: auto;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: none;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ===== КРАСИВЫЕ КНОПКИ ВЫБОРА ТЕМЫ ===== */
+.btn-group {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0;  /* Убираем отступ снизу */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.btn-group .btn {
+    flex: 1;
+    padding: 14px 12px;
+    border: none;
+    background: linear-gradient(135deg, #4208e4, #a463f5);  /* ОДИНАКОВЫЙ ГРАДИЕНТ ДЛЯ ВСЕХ */
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-group .btn:last-child {
+    border-right: none;
+}
+
+.btn-group .btn.active {
+    background: linear-gradient(135deg, #5649c0, #8c4ed4);  /* Чуть темнее для активной */
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.btn-group .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+    background: linear-gradient(135deg, #7c6cf0, #b574ff);  /* Светлее при наведении */
+}
+
+.btn-group .btn .glyphicon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Убираем лишние отступы после кнопок */
+.form-group:has(.btn-group) {
+    margin-bottom: 15px;  /* Уменьшаем отступ после группы кнопок */
+}
+
+/* ===== ЧЕКБОКСЫ ===== */
+.checkbox {
+    margin: 20px 0;
+    padding: 15px;
+    background: linear-gradient(135deg, #f8f9ff, #f0f4ff);
+    border-radius: 12px;
+    border: 2px solid #e0e7ff;
+    transition: all 0.3s ease;
+}
+
+.checkbox:hover {
+    background: linear-gradient(135deg, #f0f4ff, #e8edff);
+    border-color: #667eea;
+}
+
+.checkbox label {
+    color: #333;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+/* ===== КНОПКИ ДЕЙСТВИЙ ===== */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.action-buttons .btn {
+    flex: 1;
+    padding: 16px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.action-buttons .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.action-buttons .btn .glyphicon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #0a2472, #ee5253);
+}
+
+.btn-default {
+    background: linear-gradient(135deg, #0a2472, #ee5253);
+    color: white;
+}
+
+/* ===== КОНТАКТНАЯ ИНФОРМАЦИЯ ===== */
+.contact-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9ff, #e6f2ff);
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.contact-info p {
+    margin: 10px 0;
+    color: #0a2472;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.contact-info .glyphicon {
+    margin-right: 10px;
+    color: #667eea;
+    font-size: 18px;
+}
+
+/* ===== КНОПКА ВОЗВРАТА ===== */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #0a2472, #ee5253);
+    color: white !important;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 8px 20px rgba(238, 82, 83, 0.4);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.back-link:hover {
+    background: linear-gradient(135deg, #ee5253, #ff6b6b);
+    transform: translateX(-5px);
+    box-shadow: 0 12px 30px rgba(238, 82, 83, 0.6);
+    color: white !important;
+    text-decoration: none;
+}
+
+.back-link .glyphicon {
+    margin-right: 10px;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover .glyphicon {
+    transform: translateX(-5px);
+}
+
+/* Обязательные поля */
+.required-field label::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* ===== ИДЕНТИФИКАТОРЫ ===== */
+
+/* 3. СЕЛЕКТОР ПО ID */
+#journal .journal-info {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#students h2 {
+    color: #0a2472;
+    margin-bottom: 15px;
+}
+
+#material-ras {
+    border-top: 3px solid #0066cc;
+}
+
+#material-cp {
+    border-top: 3px solid #28a745;
+}
+
+#material-vision {
+    border-top: 3px solid #6f42c1;
+}
+
+/* ===== КОМБИНИРОВАННЫЕ СЕЛЕКТОРЫ ===== */
+
+/* 4. КОМБИНИРОВАННЫЕ СЕЛЕКТОРЫ */
+#tasks .task h3 {
+    margin-top: 0;
+}
+
+#materials .material-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.footer-column h4 {
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+/* ===== СПИСКИ ===== */
+
+/* 5. ОФОРМЛЕНИЕ СПИСКОВ */
+.contact-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.contact-list li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.contact-list li::before {
+    content: "📞";
+    position: absolute;
+    left: 0;
+}
+
+.resource-list {
+    list-style-type: decimal;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.resource-list li {
+    margin-bottom: 6px;
+    padding-left: 5px;
+}
+
+.quick-links {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.quick-links li {
+    margin-bottom: 8px;
+}
+
+.quick-links li::before {
+    content: "➤";
+    margin-right: 8px;
+    color: #0066cc;
+}
+
+.features {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.features li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.features.numbered {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+.features.numbered li::before {
+    content: none;
+}
+
+/* ===== РАЗДЕЛИТЕЛИ ===== */
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #dee2e6;
+    margin: 40px 0;
+}
+
+.gradient-separator {
+    background: linear-gradient(to right, transparent, #0066cc, transparent);
+}
+
+.dashed-separator {
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #cc00ad, #0066cc 10px, transparent 10px, transparent 20px);
+}
+
+.dot-separator {
+    text-align: center;
+    margin: 40px 0;
+    color: #0d579d;
+    font-size: 20px;
+    letter-spacing: 10px;
+}
+
+/* ===== ПОДВАЛ ===== */
+.main-footer {
+    margin-top: 30px;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.footer-column {
+    padding: 0 15px;
+}
+
+.footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.footer-separator {
+    border: 0;
+    height: 1px;
+    background-color: #dee2e6;
+    margin: 15px 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.version {
+    font-size: 13px;
+    color: #888;
+}
+
+/* ===== ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ ===== */
+.highlight {
+    background-color: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #856404;  /* Темно-желтый для контраста */
+}
+
+.instruction-box {
+    background-color: #f8f9ff;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px dashed #c5d5ff;
+}
+
+.note {
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    color: #4a5568;  /* Темно-серый */
+}
+
+/* Кнопка для формы */
+.feedback-btn {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-radius: 5px;
+    padding: 5px 15px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.feedback-btn:hover {
+    background-color: #218838 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Отступы для рядов Bootstrap */
+.row {
+    margin-bottom: 20px;
+}
+
+/* ===== ГРУППИРОВКА СВОЙСТВ ===== */
+.student-card {
+    margin: 10px 15px;
+    padding: 15px;
+    border: 1px solid #c5d5ff;
+}
+
+.material-card {
+    margin: 0 0 20px 0;
+    padding: 20px;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+}
+
+body.form-page .container {
+    width: 100%;
+    max-width: 1170px;  /* Стандартная ширина Bootstrap для больших экранов */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+body.form-page .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    box-sizing: border-box;
+}
+
+body.form-page [class*="col-"] {
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+body.form-page .col-md-6 {
+    width: 50%;
+}
+
+body.form-page .col-md-offset-3 {
+    margin-left: 25%;
+}

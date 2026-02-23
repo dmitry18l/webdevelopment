@@ -1,0 +1,76 @@
+/* === ВЫПОЛНЕНИЕ ЗАДАНИЙ ПО ПОЗИЦИОНИРОВАНИЮ === */
+
+/* ЗАДАНИЕ 1: АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ */
+#journal h2 {
+    position: absolute;           /* ← Абсолютное позиционирование */
+    top: 10px;                   /* ← Отступ сверху */
+    right: 20px;                 /* ← Отступ справа */
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 50;
+    width: 250px;
+}
+
+/* ЗАДАНИЕ 2: ФИКСИРОВАННОЕ ПОЗИЦИОНИРОВАНИЕ - БЛОК ПОЛЬЗОВАТЕЛЯ */
+.user-block {
+    position: fixed;             /* ← ФИКСИРОВАННОЕ позиционирование */
+    top: 20px;                   /* ← 20px от верха экрана */
+    right: 20px;                 /* ← 20px от правого края экрана */
+    z-index: 1000;               /* ← Поверх всего контента */
+    background: linear-gradient(135deg, #0056b3, #003d82); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    min-width: 180px;
+    color: white;
+    font-size: 15px;
+}
+
+.footer-bottom .version {
+    color: #888;                 /* ← Возвращаем исходный цвет версии */
+}
+
+/* ЗАДАНИЕ 3: КОМБИНАЦИЯ ОТНОСИТЕЛЬНОГО И АБСОЛЮТНОГО */
+.student-card {
+    position: relative;          /* ← Относительное позиционирование */
+    min-height: 200px;           /* ← Задаем высоту для контейнера */
+}
+
+.status-indicator {
+    position: absolute;          /* ← Абсолютное позиционирование */
+    top: 15px;                   /* ← Отступ сверху относительно .student-card */
+    right: 15px;                 /* ← Отступ справа относительно .student-card */
+    width: 12px;
+    height: 12px;
+}
+
+/* ЗАДАНИЕ 4: N КОЛОНОК С ПОМОЩЬЮ FLOAT */
+.material-card {
+    float: left;                 /* ← Обтекание слева */
+    width: 30%;                  /* ← Ширина 30% (3 колонки) */
+    margin-right: 5%;            /* ← Отступ между колонками */
+    box-sizing: border-box;      /* ← Корректный расчет размеров */
+}
+
+.material-card:last-child {
+    margin-right: 0;             /* ← Убираем отступ у последней колонки */
+}
+
+/* ЗАДАНИЕ 5: СВОЙСТВО CLEAR */
+.main-footer {
+    clear: both;                 /* ← Очистка обтекания с обеих сторон */
+    margin-top: 50px;
+}
+
+/* Убираем padding-bottom у body, так как фиксированного футера больше нет */
+body {
+    padding-bottom: 0;
+}
+
+/* Корректировка для контейнера материалов из-за float */
+#materials .materials-grid {
+    overflow: hidden;
+}
