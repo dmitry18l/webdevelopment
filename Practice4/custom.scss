@@ -1,0 +1,29 @@
+// ===== МОИ ПЕРЕМЕННЫЕ (ва) =====
+$primary: #0a2472;      // Темно-синий
+$secondary: #0066cc;    // Ярко-синий
+$success: #28a745;      // Зеленый
+$info: #17a2b8;         // Голубой
+$warning: #ffc107;      // Желтый
+$danger: #dc3545;       // Красный
+$light: #f8f9fa;        // Светлый
+$dark: #343a40;         // Темный
+
+// Цвета фона и текста
+$body-bg: #e6f2ff;      // Cветлый фон
+$body-color: #0a2472;   // Цвет текста
+
+// Настройки шрифтов
+$font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$line-height-base: 1.6;
+
+// Цвета ссылок
+$link-color: $secondary;
+$link-hover-color: darken($secondary, 15%);
+
+// Скругления
+$border-radius: 0.5rem;
+$border-radius-lg: 0.6rem;
+$border-radius-sm: 0.25rem;
+
+// ===== ПОДКЛЮЧЕНИЕ BOOTSTRAP =====
+@import "bootstrap";
