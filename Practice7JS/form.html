@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обратная связь | Школа №157</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    
+    <!-- Общие стили -->
+    <link rel="stylesheet" href="css/style4.css">
+</head>
+<body class="form-page">
+    <!-- ========== КОНТЕЙНЕР ДЛЯ ЦЕНТРИРОВАНИЯ ========== -->
+    <div class="container">
+        <div class="row">
+            <!-- Центрирование через offset: 3 пустых + 6 контент + 3 пустых -->
+            <div class="col-md-6 col-md-offset-3">
+                <div class="form-card">
+                    <div class="form-header">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        <h2>Свяжитесь с нами</h2>
+                        <p>Мы всегда рады помочь</p>
+                    </div>
+                    
+                    <form>
+                        <!-- Имя -->
+                        <div class="form-group required-field">
+                            <label for="name">Ваше имя</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input type="text" class="form-control" id="name" placeholder="Введите ваше имя" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-group required-field">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                </span>
+                                <input type="email" class="form-control" id="email" placeholder="example@mail.ru" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Телефон -->
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-phone"></span>
+                                </span>
+                                <input type="tel" class="form-control" id="phone" placeholder="+7 (999) 123-45-67">
+                            </div>
+                        </div>
+                        
+                        <!-- Тема -->
+                        <div class="form-group">
+                            <label>Тема обращения</label>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn">
+                                    <input type="radio" name="type" checked> 
+                                    <span class="glyphicon glyphicon-question-sign"></span> Вопрос
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="type"> 
+                                    <span class="glyphicon glyphicon-exclamation-sign"></span> Проблема
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="type"> 
+                                    <span class="glyphicon glyphicon-bullhorn"></span> Идея
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Сообщение -->
+                        <div class="form-group required-field">
+                            <label for="message">Сообщение</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </span>
+                                <textarea class="form-control" id="message" placeholder="Ваше сообщение..." required></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Чекбоксы -->
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 
+                                <span class="glyphicon glyphicon-lock"></span> Согласие на обработку
+                            </label>
+                        </div>
+                        
+                        <!-- Кнопки -->
+                        <div class="action-buttons">
+                            <button type="submit" class="btn btn-success">
+                                <span class="glyphicon glyphicon-send"></span> Отправить
+                            </button>
+                            <button type="reset" class="btn btn-default">
+                                <span class="glyphicon glyphicon-refresh"></span> Очистить
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Контакты -->
+                    <div class="contact-info">
+                        <p><span class="glyphicon glyphicon-earphone"></span> +7 (777) 777-77-77</p>
+                        <p><span class="glyphicon glyphicon-time"></span> Пн-Пт 9:00 - 18:00</p>
+                    </div>
+                    
+                    <!-- КНОПКА ВОЗВРАТА (теперь яркая красная) -->
+                    <a href="index4.html" class="back-link">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Вернуться на главную
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
