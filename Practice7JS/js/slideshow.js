@@ -98,3 +98,79 @@ function changeStudent2(direction) {
 
     document.getElementById("student2-img").src = student2Photos[student2Index];
 }
+
+// ===== СПОСОБ 1: литерал объекта =====
+const student = {
+    name: "Алексей",
+    grade: 8,
+    subject: "Математика"
+};
+
+console.log("Объект student:", student);
+
+
+// ===== СПОСОБ 2: через new Object =====
+const teacher = new Object();
+teacher.name = "Иван";
+teacher.subject = "Математика";
+teacher.experience = 98;
+
+console.log("Объект teacher:", teacher);
+
+
+// ===== ДОСТУП К СВОЙСТВАМ =====
+
+// через точку
+console.log("Имя ученика:", student.name);
+
+// через квадратные скобки
+console.log("Класс ученика:", student["grade"]);
+
+
+// изменение значения
+student.grade = 7;
+
+console.log("Новый класс:", student.grade);
+
+// ===== КОНСТРУКТОР ОБЪЕКТА =====
+
+function Student(name, subject, grade) {
+
+    this.name = name;
+    this.subject = subject;
+    this.grade = grade;
+
+    this.showInfo = function() {
+        console.log("Ученик:", this.name);
+        console.log("Предмет:", this.subject);
+        console.log("Оценка:", this.grade);
+    };
+
+}
+
+// создаем объекты
+const student1 = new Student("Алексей", "Русский", 4);
+const student2 = new Student("Мария", "Математика", 5);
+
+// вызываем метод
+student1.showInfo();
+student2.showInfo();
+
+// ===== РАСШИРЕНИЕ ARRAY =====
+
+Array.prototype.average = function () {
+
+    let sum = 0;
+
+    for (let i = 0; i < this.length; i++) {
+        sum += this[i];
+    }
+
+    return sum / this.length;
+};
+
+
+// проверка
+const marks = [5, 4, 5, 3, 5];
+
+console.log("Средняя оценка:", marks.average());
