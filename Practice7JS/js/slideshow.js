@@ -99,7 +99,7 @@ function changeStudent2(direction) {
     document.getElementById("student2-img").src = student2Photos[student2Index];
 }
 
-// ===== СПОСОБ 1: литерал объекта =====
+// ===== СПОСОБ 1 СОЗДАНИЯ ОБЪЕКТА: литерал объекта =====
 const student = {
     name: "Алексей",
     grade: 8,
@@ -174,3 +174,42 @@ Array.prototype.average = function () {
 const marks = [5, 4, 5, 3, 5];
 
 console.log("Средняя оценка:", marks.average());
+
+// ===== ДИНАМИЧЕСКИЙ СПИСОК =====
+
+const addBtn = document.getElementById("addTask");
+const removeBtn = document.getElementById("removeTask");
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+
+// Добавление элемента
+addBtn.addEventListener("click", function () {
+
+    const text = taskInput.value;
+
+    if (text === "") {
+        alert("Введите задачу!");
+        return;
+    }
+
+    const li = document.createElement("li"); // создаем элемент
+    li.className = "list-group-item";
+    li.textContent = text;
+
+    taskList.appendChild(li); // добавляем в список
+
+    taskInput.value = ""; // очищаем поле
+});
+
+// Удаление последнего элемента
+removeBtn.addEventListener("click", function () {
+
+    const items = taskList.querySelectorAll("li");
+
+    if (items.length === 0) {
+        alert("Список пуст!");
+        return;
+    }
+
+    taskList.removeChild(items[items.length - 1]);
+});
