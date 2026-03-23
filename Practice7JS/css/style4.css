@@ -852,3 +852,13 @@ body.form-page .col-md-6 {
 body.form-page .col-md-offset-3 {
     margin-left: 25%;
 }
+
+.error-text {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.input-error {
+    border: 2px solid red !important;
+}
