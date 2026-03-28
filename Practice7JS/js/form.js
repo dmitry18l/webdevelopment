@@ -1,108 +1,230 @@
 $(document).ready(function () {
-    // ==== ПОДГОТОВКА ЭЛЕМЕНТОВ ====
-    // Сохраняем ссылки на элементы формы в переменные jQuery
-    // $ перед названием переменной — общепринятое обозначение для jQuery-объектов
-    const $form = $("#feedbackForm");      // сама форма
-    const $name = $("#name");              // поле "Имя"
-    const $email = $("#email");            // поле "Email"
-    const $phone = $("#phone");            // поле "Телефон"
-    const $message = $("#message");        // поле "Сообщение"
-    const $checkbox = $("#agree");         // чекбокс согласия
-    const $submitBtn = $("#submitBtn");    // кнопка отправки формы
 
-    const $nameError = $("#nameError");    // блок для ошибки имени
-    const $emailError = $("#emailError");  // блок для ошибки email
-    const $messageError = $("#messageError"); // блок для ошибки сообщения
+    // Переопределяем стандартные скорости
+    $.fx.speeds.fast = 150;   // теперь 'fast' = 150 миллисекунд
+    $.fx.speeds.slow = 800;   // 'slow' = 800 миллисекунд
+    
+    // Добавляем новую скорость для особо медленных анимаций
+    // Теперь можно писать: .fadeIn("turtle") - будет длиться 2 секунды
+    $.fx.speeds.turtle = 2000; // 'turtle' = 2000 миллисекунд (2 секунды)
 
-    // ===== ЗАВИСИМОСТЬ ПОЛЕЙ =====
-    // Телефон блокируем до ввода имени, вместо element.disabled = true
-    $phone.prop("disabled", true); // .prop() используется в jQuery для свойства disabled
+    function setCookie(name, value, days = 7) {
+        try {
+            // Кодируем имя и значение для безопасного хранения
+            // Без этого символы ; , = и пробелы могут нарушить структуру cookie
+            const encodedName = encodeURIComponent(name);
+            const encodedValue = encodeURIComponent(value);
 
-    // При вводе в поле "Имя" проверяем, пустое ли оно, и разблокируем телефон
-    $name.on("input", function () { //вместо addEventListener("input", fn)
-        // Если имя пустое → телефон заблокирован, иначе разблокирован
+            // Формируем срок истечения cookie
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                // Вычисляем дату: текущее время + (дни * 24ч * 60мин * 60сек * 1000мс)
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = "; expires=" + date.toUTCString();
+            }
+
+            // Устанавливаем cookie с path=/ (доступна на всем сайте)
+            // Формат: имя=значение; expires=дата; path=путь
+            document.cookie = `${encodedName}=${encodedValue}${expires}; path=/`;
+        } catch (e) {
+            // Обрабатываем возможные ошибки (например, если cookies отключены в браузере)
+            console.error("Ошибка setCookie:", e);
+        }
+    }
+
+    function getCookie(name) {
+        try {
+            // Добавляем "=", чтобы искать именно имя, а не часть другого имени
+            const encodedName = encodeURIComponent(name) + "=";
+            
+            // document.cookie возвращает строку вида: "key1=val1; key2=val2; key3=val3"
+            const cookies = document.cookie.split(";");
+
+            // Перебираем все cookie
+            for (let c of cookies) {
+                // Удаляем пробелы в начале (важно, т.к. после split могут остаться пробелы)
+                c = c.trim();
+                
+                // Проверяем, начинается ли текущая cookie с искомого имени
+                if (c.indexOf(encodedName) === 0) {
+                    // Извлекаем значение (все, что после знака =)
+                    const value = c.substring(encodedName.length);
+                    // Декодируем и возвращаем
+                    return decodeURIComponent(value);
+                }
+            }
+            return null; // Cookie не найдена
+        } catch (e) {
+            console.error("Ошибка getCookie:", e);
+            return null;
+        }
+    }
+
+    function delCookie(name) {
+        // Передаем days = -1, что устанавливает дату истечения в прошлом
+        // Браузер автоматически удаляет такие cookies
+        setCookie(name, "", -1);
+    }
+
+    const $form = $("#feedbackForm");
+    const $name = $("#name");
+    const $email = $("#email");
+    const $phone = $("#phone");
+    const $message = $("#message");
+    const $checkbox = $("#agree");
+    const $submitBtn = $("#submitBtn");
+
+    // Элементы для отображения ошибок валидации
+    const $nameError = $("#nameError");
+    const $emailError = $("#emailError");
+    const $messageError = $("#messageError");
+
+    function loadFromCookies() {
+        // Получаем значения из cookies
+        const name = getCookie("name");
+        const email = getCookie("email");
+        const phone = getCookie("phone");
+        const message = getCookie("message");
+        const agreed = getCookie("agreed");
+
+        // Заполняем поля формы, если значения существуют
+        if (name) $name.val(name);
+        if (email) $email.val(email);
+        if (phone) $phone.val(phone);
+        if (message) $message.val(message);
+        
+        // Для чекбокса проверяем именно "true" (строка), т.к. getCookie возвращает строку
+        // Если использовать if(agreed), то любое непустое значение сделает чекбокс отмеченным
+        if (agreed === "true") $checkbox.prop("checked", true);
+    }
+
+    // Вызываем загрузку данных при старте
+    loadFromCookies();
+
+    function saveToCookies() {
+        setCookie("name", $name.val());
+        setCookie("email", $email.val());
+        setCookie("phone", $phone.val());
+        setCookie("message", $message.val());
+        setCookie("agreed", $checkbox.prop("checked"));
+    }
+
+    $form.hide().fadeIn("slow");
+
+    // Изначально поле телефона заблокировано
+    $phone.prop("disabled", true);
+    
+    // При вводе текста в поле имени проверяем, не пустое ли оно
+    $name.on("input", function () {
+        // Если имя не пустое (после удаления пробелов), разблокируем поле телефона
         $phone.prop("disabled", $name.val().trim() === "");
     });
 
-    // ===== ВАЛИДАЦИЯ ФОРМЫ =====
+    function showError($el, $errorEl, text) {
+        // Добавляем класс для стилизации (красная рамка)
+        $el.addClass("input-error");
+
+        // Показываем сообщение об ошибке с анимацией
+        $errorEl
+            .stop(true, true)   // Останавливаем все текущие анимации на этом элементе
+            .hide()             // Скрываем (чтобы анимация началась с нуля)
+            .text(text)         // Устанавливаем текст ошибки
+            .slideDown("fast"); // Плавно показываем со скоростью 'fast' (150 мс)
+    }
+
+    function hideError($el, $errorEl) {
+        // Удаляем класс ошибки (убираем красную рамку)
+        $el.removeClass("input-error");
+
+        // Плавно скрываем сообщение
+        $errorEl
+            .stop(true, true)
+            .slideUp("fast");
+    }
+
     function validateForm() {
-        let isValid = true; // флаг валидности формы
+        let isValid = true; // Предполагаем, что форма валидна
 
-        // Очищаем предыдущие ошибки
-        $nameError.text("");
-        $emailError.text("");
-        $messageError.text("");
-
-        // Убираем красную подсветку с полей
-        $name.removeClass("input-error");
-        $email.removeClass("input-error");
-        $message.removeClass("input-error");
-
-        // Проверка имени: не пустое
+        // ----- Валидация имени -----
         if ($name.val().trim() === "") {
-            $nameError.text("Введите имя"); // показываем текст ошибки
-            $name.addClass("input-error");  // красная рамка
+            showError($name, $nameError, "Введите имя");
             isValid = false;
+        } else {
+            hideError($name, $nameError);
         }
 
-        // Проверка email
+        // ----- Валидация email -----
         if ($email.val().trim() === "") {
-            $emailError.text("Введите email");
-            $email.addClass("input-error");
+            showError($email, $emailError, "Введите email");
             isValid = false;
         } else if (!$email.val().includes("@")) {
-            // Простая проверка на наличие @
-            $emailError.text("Некорректный email");
-            $email.addClass("input-error");
+            // Примечание: в production стоит использовать регулярное выражение
+            // /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(email)
+            showError($email, $emailError, "Некорректный email");
             isValid = false;
+        } else {
+            hideError($email, $emailError);
         }
 
-        // Проверка сообщения
+        // ----- Валидация сообщения -----
         if ($message.val().trim() === "") {
-            $messageError.text("Введите сообщение");
-            $message.addClass("input-error");
+            showError($message, $messageError, "Введите сообщение");
             isValid = false;
+        } else {
+            hideError($message, $messageError);
         }
 
-        // Проверка чекбокса (обязателен)
+        // ----- Валидация чекбокса -----
         if (!$checkbox.prop("checked")) {
-            isValid = false;
+            isValid = false; // Ошибку не показываем, просто блокируем отправку
         }
 
-        return isValid; // возвращаем true, если ошибок нет
+        return isValid;
     }
 
-    // ===== УПРАВЛЕНИЕ КНОПКОЙ =====
     function updateButton() {
         if (validateForm()) {
-            // Если форма валидна, кнопка зеленая и активная
-            $submitBtn.removeClass("btn-secondary")
-                      .addClass("btn-success")
-                      .prop("disabled", false);
+            // Форма валидна: делаем кнопку активной и меняем класс на зеленый
+            $submitBtn
+                .removeClass("btn-default")
+                .addClass("btn-success")
+                .prop("disabled", false);
         } else {
-            // Иначе кнопка серая и заблокирована
-            $submitBtn.removeClass("btn-success")
-                      .addClass("btn-secondary")
-                      .prop("disabled", true);
+            // Форма невалидна: блокируем кнопку и делаем серой
+            $submitBtn
+                .removeClass("btn-success")
+                .addClass("btn-default")
+                .prop("disabled", true);
         }
     }
 
-    // Проверяем форму при любом вводе в полях
-    $form.on("input", updateButton);
+    $form.on("input change", function () {
+        updateButton();   // Проверяем валидность и обновляем кнопку
+        saveToCookies();  // Сохраняем текущие значения в cookies
+    });
 
-    // Инициализируем состояние кнопки при загрузке
+    // Инициализируем кнопку при загрузке страницы
     updateButton();
 
-    // ===== ОБРАБОТКА SUBMIT =====
     $form.on("submit", function (event) {
-        event.preventDefault(); // отменяем стандартную отправку формы
+        // Отменяем стандартное поведение формы (перезагрузку страницы)
+        event.preventDefault();
 
+        // Проверяем валидность перед отправкой
         if (!validateForm()) {
-            alert("Исправьте ошибки!"); // если форма невалидна, предупреждаем пользователя
-            return;
+            // Анимация "тряски" - визуальный сигнал об ошибке
+            // Форма смещается влево-вправо, привлекая внимание пользователя
+            $form
+                .stop(true, true)                      // Останавливаем текущие анимации
+                .animate({ marginLeft: "-8px" }, 60)   // Сдвиг влево
+                .animate({ marginLeft: "8px" }, 60)    // Сдвиг вправо
+                .animate({ marginLeft: "-8px" }, 60)   // Снова влево
+                .animate({ marginLeft: "0px" }, 60);   // Возврат в исходное положение
+            return; // Прерываем отправку
         }
 
-        // Собираем данные формы в объект
+        // ----- Сбор данных формы -----
         const data = {
             name: $name.val(),
             email: $email.val(),
@@ -111,12 +233,33 @@ $(document).ready(function () {
             agreed: $checkbox.prop("checked")
         };
 
-        console.log("Данные формы:", data); // выводим объект в консоль
-        alert("Форма отправлена!");          // уведомление пользователю
+        // Выводим данные в консоль (в реальном проекте здесь был бы AJAX-запрос)
+        console.log("Данные формы:", data);
 
-        // Сбрасываем форму и кнопку
-        $form[0].reset(); // стандартный метод JS для сброса формы
-        updateButton();   // обновляем состояние кнопки после сброса
+        // ----- Анимация подтверждения отправки -----
+        // Создаем эффект "пульсации" - форма становится полупрозрачной и возвращается
+        $form
+            .animate({ opacity: 0.5 }, 200)  // Уменьшаем прозрачность
+            .delay(100)                      // Ждем 100 мс
+            .animate({ opacity: 1 }, 200, function () {
+                // Колбэк после завершения анимации
+                alert("Форма отправлена!");  // Уведомляем пользователя
+            });
+
+        // ----- Очистка формы -----
+        // ВАЖНО: Код очистки cookies закомментирован для демонстрации
+        // В реальном проекте можно раскомментировать, чтобы удалить черновик после отправки
+        // delCookie("name");
+        // delCookie("email");
+        // delCookie("phone");
+        // delCookie("message");
+        // delCookie("agreed");
+
+        // Сбрасываем значения всех полей формы
+        $form[0].reset();
+        
+        // Обновляем состояние кнопки (после сброса форма станет невалидной)
+        updateButton();
     });
 
 });
